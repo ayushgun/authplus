@@ -1,4 +1,7 @@
 # auth-plus 
+
+<img src="https://github.com/ayushgun/auth-plus/blob/main/images/main.png" alt="Logo" width="400">
+
 Auth Plus is a Python-based MongoDB and Flask API that allows for username, password, and HWID authentication.
 
 ![GitHub last commit](https://img.shields.io/github/last-commit/ayushgun/auth-plus?logo=github) ![GitHub repo size](https://img.shields.io/github/repo-size/ayushgun/auth-plus?logo=github)
