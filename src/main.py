@@ -24,7 +24,7 @@ LICENSE_COLLECTION_NAME = ""
 
 # INSTANCES
 app = Flask(__name__)
-auth = BasicRoleAuth(user_file="./roles.txt")
+auth = BasicRoleAuth(user_file="roles.txt")
 
 # CONNECT TO DATABASE
 cluster = MongoClient(USER_MONGO_URI)
