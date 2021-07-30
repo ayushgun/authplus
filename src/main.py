@@ -336,8 +336,8 @@ def register_user(license, username, password):
                 "username": username,
                 "password": password,
                 "hwid": None,
-				"resets": 0,
-				"discord_id": 0
+		"resets": 0,
+		"discord_id": 0
             }
         )
         return {"status": success()}
