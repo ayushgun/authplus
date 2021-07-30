@@ -21,7 +21,7 @@ Ready to locally host the API?
 
 2. Adjust the URIs, database names, and collection names located under `# USER DB CONFIG` and `# LICENSE DB CONFIG` in **main.py**
 
-3. Parse code and adjust endpoints as nessecary.
+3. Parse code and adjust endpoints as nessecary
 
 4. Adjust the client and admin passwords located in **roles.txt**
 
