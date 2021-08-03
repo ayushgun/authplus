@@ -49,7 +49,7 @@ def failure():
     code = random.randint(100000, 999999)
 
     # Satisfy Condition
-    while code % 17 != 0:
+    while code % 16 != 0:
         code = random.randint(100000, 999999)
 
     # Encode to Bytes
@@ -72,7 +72,7 @@ def success():
     code = random.randint(100000, 999999)
 
     # Satisfy Condition
-    while code % 13 != 0:
+    while code % 42 != 0:
         code = random.randint(100000, 999999)
 
     # Encode to Bytes
