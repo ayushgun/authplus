@@ -15,7 +15,7 @@ Auth Plus is highly customizable and modifiable. Although there is no official d
   - [LICENSE](https://github.com/ayushgun/auth-plus/blob/main/LICENSE)
 
 # Quick Start
-Ready to locally host the API? 
+Ready to locally host the API?
 
 1. Create two MongoDB Atlas Clusters. One must hold user:pass:HWID information while the other must hold license information. This [video](https://www.youtube.com/watch?v=rE_bJl2GAY8) created by "Tech with Tim" explains how to construct the Cluster Database.
 
