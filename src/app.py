@@ -12,6 +12,9 @@ from flask import redirect
 from flask import request
 from flask import Flask
 
+# PROJECT IMPORTS
+from authencrypt import failure, success, encrypt_status
+
 # USER DB CONFIG
 USER_MONGO_URI = ""
 USER_DATABASE_NAME = ""
@@ -37,71 +40,6 @@ license_database = cluster_2[LICENSE_DATABASE_NAME][LICENSE_COLLECTION_NAME]
 # GET KEY
 with open("key.txt", "rb") as file:
     key = file.read()
-
-
-# RESPONSES
-def failure():
-    """
-    Generate a code to represent
-    a failure status
-    """
-
-    code = random.randint(100000, 999999)
-
-    # Satisfy Condition
-    while code % 16 != 0:
-        code = random.randint(100000, 999999)
-
-    # Encode to Bytes
-    response = str(code).encode()
-
-    # Encrypt
-    hash = Fernet(key)
-    response = hash.encrypt(response)
-
-    # Response
-    return response.decode("utf-8")
-
-
-def success():
-    """
-    Generate a code to represent
-    a success status
-    """
-
-    code = random.randint(100000, 999999)
-
-    # Satisfy Condition
-    while code % 42 != 0:
-        code = random.randint(100000, 999999)
-
-    # Encode to Bytes
-    response = str(code).encode()
-
-    # Encrypt
-    hash = Fernet(key)
-    response = hash.encrypt(response)
-
-    # Response
-    return response.decode("utf-8")
-
-
-# ENCRYPTION
-def encrypt_status(string: str):
-    """
-    Hash an API response with
-    Fernet
-    """
-
-    # Encode to Bytes
-    response = string.encode()
-
-    # Encrypt
-    hash = Fernet(key)
-    response = hash.encrypt(response)
-
-    # Response
-    return response.decode("utf-8")
 
 
 # -- CLIENT ENDPOINTS --
