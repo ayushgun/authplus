@@ -1,5 +1,5 @@
-# -*- coding: utf-8 -*- 
-# !/usr/bin/env python3 
+# -*- coding: utf-8 -*-
+# !/usr/bin/env python3
 
 # IMPORTS
 import random
@@ -13,7 +13,7 @@ from flask import request
 from flask import Flask
 
 # PROJECT IMPORTS
-from authencrypt import failure, success, encrypt_status
+from encrypt import failure, success, encrypt_status
 
 # USER DB CONFIG
 USER_MONGO_URI = ""
@@ -274,8 +274,8 @@ def register_user(license, username, password):
                 "username": username,
                 "password": password,
                 "hwid": None,
-		"resets": 0,
-		"discord_id": 0
+                "resets": 0,
+                "discord_id": 0,
             }
         )
         return {"status": success()}
