@@ -8,7 +8,7 @@ Auth Plus is a Python-based MongoDB and Flask API that allows for username, pass
 
 Auth Plus is highly customizable and modifiable. Although there is no official documentation, each Flask function includes docstrings that explain the purpose, intent, and access level of the endpoint. 
 
-- [auth-plus](#auth-plus)
+- [auth-plus](https://authpl.us)
   - [Quick Start](#quick-start)
   - [Important Notes](#important)
   - [Credits](#credits)
