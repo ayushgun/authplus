@@ -1,5 +1,5 @@
-# -*- coding: utf-8 -*-
-# !/usr/bin/env python3
+# typed: true
+# encoding: utf8
 
 # IMPORTS
 import random
