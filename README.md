@@ -31,7 +31,7 @@ Ready to locally host the API?
 6. Run `python main.py` to start the API
 
 # Important
-Please note that the API will NOT start without adjusting the config correctly. Please carefully follow the "Tech with Tim" [video](https://www.youtube.com/watch?v=rE_bJl2GAY8) linked to understand how to set up a MongoDB cluster properly. Additionally, please note that the PyMongo setup displayed in the Tech with Tim video is not nessecary, though it may be beneficial to conceptually understand the API.
+Please note that the API will NOT start without adjusting the config correctly. Additionally, please note that the PyMongo setup displayed in Tim Ruscia's wonderful video is not nessecary, though it may be beneficial to conceptually understand the API.
 
 # Credits
 Thank you to Tech with Tim for his amazing MongoDB and PyMongo tutorial
