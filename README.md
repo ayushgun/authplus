@@ -33,10 +33,5 @@ Ready to locally host the API?
 # Important
 Please note that the API will NOT start without adjusting the config correctly. Additionally, please note that the PyMongo setup displayed in Tim Ruscia's wonderful video is not nessecary, though it may be beneficial to conceptually understand the API.
 
-# Credits
-Thank you to Tech with Tim for his amazing MongoDB and PyMongo tutorial
-
-Thank you to Flask for their application-oriented documentation.
-
 # License
-AuthPlus is officially under the MIT license.
+AuthPlus is officially licensed under the MIT license. It is a project meant for the public domain, and fully supports open source development.
