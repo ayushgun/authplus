@@ -12,7 +12,6 @@ AuthPlus is highly customizable and scalable. The official documentation is loca
 - [AuthPlus](https://authpl.us)
   - [Quick Start](#quick-start)
   - [Important Notes](#important)
-  - [Credits](#credits)
   - [LICENSE](https://github.com/ayushgun/auth-plus/blob/main/LICENSE)
 
 # Quick Start
