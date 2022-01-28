@@ -6,11 +6,9 @@ import random
 import string
 
 from flask_basic_roles import BasicRoleAuth
+from flask import redirect, request, Flask
 from cryptography.fernet import Fernet
 from pymongo import MongoClient
-from flask import redirect
-from flask import request
-from flask import Flask
 
 # PROJECT IMPORTS
 from encrypt import failure, success, encrypt_status
