@@ -29,6 +29,11 @@ Ready to locally host the API?
 
 6. Run `python main.py` to start the API
 
+# AuthPlus V5
+Thank you to everyone who has supported AuthPlus V4. The developer team is currently working on developing a redesigned version of AuthPlus with an emphasis on semantics, scalability, and documentation. AuthPlus V5 will be built with the FastAPI framework. 
+
+✉️ Interested in contributing? Create a pull request and we'll review it!
+
 # Important
 Please note that the API will NOT start without adjusting the config correctly. Additionally, please note that the PyMongo setup displayed in Tim Ruscia's wonderful video is not nessecary, though it may be beneficial to conceptually understand the API.
 
