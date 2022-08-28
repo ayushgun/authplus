@@ -1,0 +1,10 @@
+fernet_key = ""
+mongo_uri = ""
+
+[admin]
+username = "ADMIN"
+password = "PASSWORD"
+
+[client]
+username = "CLIENT"
+password = "PASSWORD"
