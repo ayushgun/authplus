@@ -1,4 +1,0 @@
-cryptography==3.4.7
-Flask==2.0.1
-flask_basic_roles==0.2
-pymongo==3.12.0
