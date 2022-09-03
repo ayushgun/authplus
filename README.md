@@ -1,6 +1,6 @@
 <p align="center">
-    <a href="https://sulu.io/" target="_blank">
-        <img width="50%" src="https://github.com/ayushgun/authplus/blob/main/web/assets/AuthPlus_Logo.png?raw=true" alt="Sulu logo">
+    <a href="https://authpl.us" target="_blank">
+        <img width="50%" src="https://github.com/ayushgun/authplus/blob/main/web/assets/AuthPlus_Logo.png?raw=true" alt="AuthPlus logo">
     </a>
 </p>
 
@@ -8,7 +8,7 @@
     <a href="LICENSE.md" target="_blank">
         <img src="https://img.shields.io/github/license/ayushgun/authplus.svg" alt="GitHub license">
     </a>
-    <a href="https://github.com/sulu/sulu/commits/2.x" target="_blank">
+    <a href="https://github.com/ayushgun/authplus/commits/2.x" target="_blank">
         <img src="https://img.shields.io/github/commit-activity/y/ayushgun/authplus.svg" alt="GitHub commit activity">
     </a>
     <a href="https://github.com/ayushgun/authplus/graphs/contributors" target="_blank">
