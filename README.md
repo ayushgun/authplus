@@ -20,6 +20,6 @@
 </p>
 <br/>
 
-[AuthPlus](https://authpl.us/) is a highly scalable, performant, and secure REST API for username, password, and hardware ID authentication. AuthPlus features symmetric data encryption, endpoint-specific IP ratelimiting, and cryptographically-secure credential checking practices. AuthPlus also includes native, asynchronous support for license key management and account registration. 
+[AuthPlus](https://authpl.us/) is a highly scalable, performant, and secure REST API for username, password, and hardware ID authentication. AuthPlus features symmetric data encryption, endpoint-specific IP ratelimiting, and cryptographically-secure credential checking practices. AuthPlus also includes batteries-included asynchronous support for license key management and account registration. 
 
 🖨️ Installation, self-hosting, and setup documentation is coming soon.
