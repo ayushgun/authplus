@@ -40,17 +40,17 @@ encrypt = EncryptResponse(config["fernet_key"])
 # Load Starlette Middleware
 app.add_middleware(
     middleware.ContextMiddleware,  # type: ignore
-    plugins=(plugins.ForwardedForPlugin(),),  # type: ignore
+    plugins=(plugins.ForwardedForPlugin()),  # type: ignore
 )
 
 # -*- Startup Functions -*-
 async def _open_db() -> None:
-    # Connect to Database
+    # Connect to database
     app.state.__db = AsyncIOMotorClient(
         config["mongo_uri"], serverSelectionTimeoutMS=5000
     )
 
-    # Load DB Collections
+    # Load DB collections
     app.state.users = app.state.__db["customers"]["users"]
     app.state.licenses = app.state.__db["customers"]["licenses"]
 
@@ -69,11 +69,11 @@ async def create_license() -> tuple:
     Generate a license key to allow for user registration.
     """
 
-    # Generate Key
+    # Generate key
     license_key = "".join(random.choices(string.ascii_uppercase + string.digits, k=16))
     creation_time = date.today().strftime("%m/%d/%Y")
 
-    # Add to Database
+    # Add to database
     await app.state.licenses.insert_one(
         {"license": license_key, "date_created": creation_time}
     )
@@ -86,11 +86,11 @@ def _check_admin(credentials: HTTPBasicCredentials = Depends(security)) -> bool:
     Check if the credentials match admin credentials.
     """
 
-    # Check Username and Password
+    # Check username and password
     correct_user = compare_digest(credentials.username, config["admin"]["username"])
     correct_pass = compare_digest(credentials.password, config["admin"]["password"])
 
-    # Raise Error if Incorrect
+    # Raise error if incorrect credentials
     if not (correct_user and correct_pass):
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED)
 
@@ -102,11 +102,11 @@ def _check_client(credentials: HTTPBasicCredentials = Depends(security)) -> bool
     Check if the credentials match client credentials.
     """
 
-    # Check Username and Password
+    # Check username and password
     correct_user = compare_digest(credentials.username, config["client"]["username"])
     correct_pass = compare_digest(credentials.password, config["client"]["password"])
 
-    # Raise Error if Incorrect
+    # Raise error if incorrect credentials
     if not (correct_user and correct_pass):
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED)
 
@@ -131,14 +131,14 @@ async def login_user(request: Request, username: str, password: str, hwid: str) 
     [Client]: Validate a user's login.
     """
 
-    # Find Account
+    # Find account
     find = await app.state.users.find_one({"username": username, "password": password})
 
-    # Check if not found
+    # Check if account not found
     if not find:
         return {"status": encrypt.failure()}
 
-    # Check if Hardware ID is present
+    # Check if hardware ID is present
     if not find["hardware_id"]:
         await app.state.users.update_one(
             {"username": username, "password": password},
@@ -146,7 +146,7 @@ async def login_user(request: Request, username: str, password: str, hwid: str) 
         )
 
     elif not compare_digest(find["hardware_id"], hwid):
-        # Return Error
+        # Return error if hardware ID is different
         return {"status": encrypt.failure()}
 
     return {"status": encrypt.success()}
@@ -156,7 +156,7 @@ async def login_user(request: Request, username: str, password: str, hwid: str) 
 @app.get("/docs", dependencies=[Depends(_check_admin)], include_in_schema=False)
 async def get_documentation() -> HTMLResponse:
     """
-    [Admin]: Display dynamically generated API documentation
+    [Admin]: Display dynamically generated API documentation.
     """
 
     return get_redoc_html(openapi_url="/oapi.json", title="docs")
@@ -165,7 +165,7 @@ async def get_documentation() -> HTMLResponse:
 @app.get("/oapi.json", dependencies=[Depends(_check_admin)], include_in_schema=False)
 async def openapi() -> dict:
     """
-    [Admin]: Display OpenAPI information
+    [Admin]: Display OpenAPI information.
     """
 
     return get_openapi(title="AuthPlus", version="5.0.0", routes=app.routes)
@@ -180,22 +180,22 @@ async def register_user(
     [Admin]: Register a user with a license key.
     """
 
-    # Find Profile
+    # Find profile
     exists = await app.state.users.find_one({"username": username})
 
-    # Return Error if Exists
+    # Return error if username exists
     if exists:
         return {"status": encrypt.text("This username already exists.")}
 
-    # Check License
+    # Check license key
     license_key = license_key.upper()
     license_exists = await app.state.licenses.find_one({"license": license_key})
 
-    # Return Error if License Invalid
+    # Return error if license is invalid
     if not license_exists:
         return {"status": encrypt.text("Invalid license.")}
 
-    # Proceed if all checkpoints are valid
+    # Create account if checkpoints are valid
     await app.state.licenses.delete_one({"license": license_key})
     await app.state.users.insert_one(
         {
@@ -219,14 +219,14 @@ async def fetch_user(request: Request, username: str) -> dict:
     [Admin]: Fetch user account data from a username ID.
     """
 
-    # Find Username
+    # Find username
     find = await app.state.users.find_one({"username": username})
 
-    # Check if not found
+    # Check if account not found
     if not find:
         return {"status": encrypt.failure()}
 
-    # Return Account as JSON
+    # Return account data as JSON
     return {
         "username": encrypt.text(find["username"]),
         "password": encrypt.text(find["password"]),
@@ -243,14 +243,14 @@ async def delete_user(request: Request, username: str) -> dict:
     [Admin]: Delete a specific user account.
     """
 
-    # Find Profile
+    # Find profile
     exists = await app.state.users.find_one({"username": username})
 
-    # Return Error if it doesn't exit
+    # Return error if account does not exist
     if not exists:
         return {"status": encrypt.text("Unable to locate that account.")}
 
-    # Delete from Database
+    # Delete from database
     await app.state.users.delete_one({"username": username})
     return {"status": encrypt.success()}
 
@@ -262,14 +262,14 @@ async def reset_hardware_id(request: Request, username: str) -> dict:
     [Admin]: Reset the Hardware ID of an account.
     """
 
-    # Find Profile
+    # Find profile
     exists = await app.state.users.find_one({"username": username})
 
-    # Return Error if it doesn't exit
+    # Return error if it account does not exist
     if not exists:
         return {"status": encrypt.text("Unable to locate that account.")}
 
-    # Reset Hardware ID and increment resets by 1
+    # Reset hardware ID and increment reset counter by 1
     await app.state.users.update_one(
         {"username": username},
         {"$set": {"hardware_id": "", "resets": (exists["hwid_resets"] + 1)}},
@@ -285,10 +285,10 @@ async def reset_password(request: Request, username: str, new_password: str) -> 
     [Admin]: Change a user's password.
     """
 
-    # Find Profile
+    # Find profile
     exists = await app.state.users.find_one({"username": username})
 
-    # Return Error if it doesn't exit
+    # Return error if account does not exist
     if not exists:
         return {"status": encrypt.text("Unable to locate that account.")}
 
@@ -308,14 +308,14 @@ async def change_note(request: Request, username: str, note: str) -> dict:
     [Admin]: Change a user's account note.
     """
 
-    # Find Profile
+    # Find profile
     exists = await app.state.users.find_one({"username": username})
 
-    # Return Error if it doesn't exit
+    # Return error if account does not exist
     if not exists:
         return {"status": encrypt.text("Unable to locate that account.")}
 
-    # Set note
+    # Add note to account
     await app.state.users.update_one(
         {"username": username},
         {"$set": {"note": note}},
@@ -331,10 +331,9 @@ async def generate_license(request: Request) -> dict:
     [Admin]: Generate a license key for user registration.
     """
 
-    # Generate Key with Helper Function
+    # Generate a license key
     license_key, creation_time = await create_license()
 
-    # Return Key
     return {"license": encrypt.text(license_key), "date_created": creation_time}
 
 
@@ -342,10 +341,10 @@ async def generate_license(request: Request) -> dict:
 @limiter.limit("5/minute")
 async def app_statistics(request: Request) -> dict:
     """
-    [Admin]: Display database user statistics
+    [Admin]: Display database user statistics.
     """
 
-    # Find Database Total Estimates
+    # Lazy estimate the user & license totals
     total_users = await app.state.users.estimated_document_count()
     total_licenses = await app.state.licenses.estimated_document_count()
 
