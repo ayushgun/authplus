@@ -1,8 +1,0 @@
-fastapi==0.73.0
-slowapi==0.1.5
-fastapi-mail==1.0.4
-motor==2.5.1
-starlette-context==0.3.3
-uvicorn==0.17.0.post1
-toml==0.10.2
-cryptography==36.0.2
