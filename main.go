@@ -68,8 +68,8 @@ func connectToDatabase() {
 	}
 
 	// Load collections from database
-	users = cluster.Database("customers").Collection("users")
-	licenses = cluster.Database("customers").Collection("licenses")
+	users = cluster.Database("authentication").Collection("users")
+	licenses = cluster.Database("authentication").Collection("licenses")
 }
 
 // Access request IP addresses for ratelimiting
@@ -461,10 +461,10 @@ func main() {
 	loadConfig()
 	connectToDatabase()
 
-	// Initialize Gin API router
+	// Initialize API router
 	gin.SetMode(gin.ReleaseMode)
 	router := gin.Default()
-	fmt.Println("[GIN] API listening on ", os.Getenv("api_url"))
+	fmt.Println("[GIN] AuthPlus API listening on ", os.Getenv("api_url"))
 
 	// Set up ratelimit cache and middleware
 	store := ratelimit.InMemoryStore(&ratelimit.InMemoryOptions{
