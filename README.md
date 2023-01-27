@@ -37,7 +37,7 @@ Ready to self-host AuthPlus?
 
 2. Clone the repository with `git clone https://github.com/ayushgun/authplus`.
 
-3. Initialize a MongoDB cluster with a database titled `authentication` and collections titled `licenses` and `users`. Set the `database_uri` in `configuration/config.env` to the MongoDB connection URI
+3. Initialize a MongoDB cluster with a database titled `authentication` and two collections titled `licenses` and `users`. Set the `database_uri` in `configuration/config.env` to the MongoDB connection URI.
 
 4. Generate a Fernet encryption key using this [script](https://gist.github.com/ayushgun/1fd456f8cfb51e1d6ccf21d52c39317f). Set the `encryption_key` in `configuration/config.env` to the generated Fernet encryption key.
 
